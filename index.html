@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="remark,remarkjs,markdown,slideshow,presentation" />
+    <meta name="description" content="A simple, in-browser, markdown-driven slideshow tool." />
+    <title>Remark</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content {
+        padding-top: 1em;
+        padding-right: 2em;
+        padding-bottom: 1em;
+        padding-left: 2em;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+#Frontend State of the Union
+[jav-UHHH-script]
+</br>
+Part 1
+</br>
+Alex Gordon
+---
+layout: false
+
+.left-column[
+  ## What is this presentation?
+]
+.right-column[
+  **This is presentation will:**
+  - Set up and configure a modern javascript stack
+  - Explain the tools we use for the (our) stack and why we use them
+  - Attempt to explain away some of the pains of the javascript world
+
+
+  **This presentation will not:**
+
+  - Explain away some of the javascript inconsistencies
+
+  ```javascript
+  > Array(16).join("lol" - 2) + " Batman!"
+  < "NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!"
+  ```
+
+  - Make the Cinco de Mayo party come sooner 🇲🇽
+]
+---
+layout: false
+.left-column[
+  ## What Tools are we using?
+]
+.right-column[
+- **Node** is a JavaScript runtime environment. This allows us to run javascript without a browser, using a c++ project called v8. v8 is the same runtime used by Chrome.
+
+- **NPM** is the package manager for Node.
+
+- **Yarn** is Facebook's attempt at versioning NPM Modules, in addition to making NPM deterministic. It provides offline downloads, version locks, and prevents issues like left-pad.
+
+- **package.json** this file used to describe and configure your JavaScript project. It's kind of a Gemfile with more significance.
+]
+---
+layout: false
+.left-column[
+  ## What Tools are we using?
+  ## Tools Pt. 2
+]
+.right-column[
+- **Webpack** Webpack is a module.red[*] bundler. It takes a lot of modules and combines them.
+
+- **Babel** is a Javascript transpiler
+    - Why do we need/want Babel?
+    - Why do we need/want a transpiler?
+
+
+.footnote[.red[*] We'll worry about what a 'module' is later]
+]
+---
+layout: false
+.left-column[
+  ## What Tools are we using?
+  ## Tools Pt. 2
+  ## 🐰 Trail
+]
+.right-column[
+To understand why transpilers are a good idea, you have to look at the somewhat recent history of javascript.
+- 2008
+- Tons of lone rangers
+  - Apple, Microsoft, Yahoo and others all fighting over what should go into the future of javascript
+  - Maybe we should team up?
+      - Naw
+      - Wait, let's create a cool name for our group so it looks like we're coordinating
+      - TC39 sounds good. Now you can't tell if we're government or not
+      - Okay now we'll go back to messing up javascript
+  - Let's work on two versions of javascript simultaneously, 3.1 and 4.0
+      - We *promise* 3.1 will have a subset of the features of 4.0
+      - hehe we lied again
+
+]
+---
+layout: false
+.left-column[
+  ## What Tools are we using?
+  ## Tools Pt. 2
+  ## 🐰 Trail
+  ## 🐰 Trail Pt. 2
+]
+.right-column[
+Okay, we broke javascript, what now?
+  - Let's work on one BIG version of javascript, that will have new cool features
+  - Call it version 5? Cool
+    - wait guys how do you change a title in MS Word?
+  - ECMA-262 5th Edition Spec released on December 3, 2009
+  - Let's call it ES5
+
+Phew that was hard let's take a 5 year break
+]
+---
+layout: false
+.left-column[
+  ## What Tools are we using?
+  ## Tools Pt. 2
+  ## 🐰 Trail
+  ## 🐰 Trail Pt. 2
+]
+.right-column[
+2011...
+]
+--
+.right-column[
+2012...
+]
+--
+.right-column[
+2013...
+]
+--
+.right-column[
+2014...
+]
+--
+.right-column[
+2015...
+]
+---
+layout: false
+.left-column[
+  ## What Tools are we using?
+  ## Tools Pt. 2
+  ## 🐰 Trail
+  ## 🐰 Trail Pt. 2
+  ## 🐰 2015
+]
+.right-column[
+Okay we need new javascript features, let's publish another spec (and make it YUUUGEEE)
+- ES6 (EMCAScript 2015) spec was finalized in June 2015
+  - Let's define it in a way that they can be compiled down to the last version of javascript
+  - Wait this is a good idea, now we can publish more specs
+]
+--
+.right-column[
+So let's try again to fix the javascript issue.
+- Deploying a language where there's infinite compilers is hard
+- Maybe if we do this more frequently, it would work better?
+- Okay, let's see if we can publish specs more frequently, and just define them in terms of previous iterations of javascript
+]
+--
+.right-column[
+From now on, we, the cool **TC39**, will henceforth publish a javascript spec every year (ES7 spec June 2016). Just transpile...
+
+... and thus, Babel.
+]
+---
+layout: false
+.left-column[
+  ## Getting Started
+]
+.right-column[
+
+1. Create our project
+    ```bash
+    yarn init
+    ```
+2. Create our index.js
+3. Run Project using
+```bash
+node .
+```
+4. Get lazy -- let's add a scripts section
+```json
+"scripts": {
+      "start": "node ."
+}
+```
+5. Add our first package--every body likes color. Let's add some color.
+```bash
+yarn add color
+```
+```javascript
+// index.js
+const color = require('color')
+const redHexa = color({ r: 255, g: 0, b: 0 }).hex()
+console.log(redHexa)
+```
+]
+---
+layout: false
+.left-column[
+  ## Getting Started
+  ## Using Babel and ES6
+]
+.right-column[
+
+1. Housecleaning. Let's put our index.js in a ```src``` folder so we can separate the code of our app, from the meta stuff.
+```bash
+mkdir src && mv index.js ./src
+```
+
+2. Now lets add babel, so we can use some of the new JS stuff
+```javascript
+// in index.js
+const str = 'ES6 World'
+console.log(`Hello ${str}`)
+```
+  and then add the babel compiler
+```bash
+yarn add --dev babel-cli
+```
+
+  - Note, there's two types of dependencies.
+      - **devDependencies**: Development stuff--babel
+      - **dependencies**: Production stuff--jquery
+
+3. Change our startup script to run babel
+```json
+"scripts": {
+      "start": "babel-node src"
+},
+```
+]
+---
+layout: false
+.left-column[
+  ## Getting Started
+  ## Using Babel and ES6
+  ## Babel Pt. 2
+]
+.right-column[
+  Currently, babel isn't actually doing anything. The real benefit of babel is it's plugin system, so let's use a plugin.
+
+1. Install most recent EMCAScript feature babel plugin
+```bash
+yarn add --dev babel-preset-env
+```
+Now how to we configure programs in *nix? dotfiles
+Let's create a ```.babelrc```
+```json
+{
+      "presets": [
+        "env"
+      ]
+}
+```
+]
+---
+layout: false
+.left-column[
+  ## ES6 Features and Modules
+]
+.right-column[
+So our application is getting pretty complicated, so I think it's time for some new files.
+
+1. In ```src/programmer.js```, let's create a RubyProgrammer (Doug?) class
+  ```javascript
+    class RubyProgrammer {
+      constructor(name) {
+        this.name = name;
+      }
+
+      talk() {
+        return `Wah wah, I am ${this.name} and Ruby is awesome`;
+      }
+    }
+
+    module.exports = RubyProgrammer;
+  ```
+
+2. And let's use that class...
+]
+--
+.right-column[
+But wait, what's a module?
+]
+--
+.right-column[
+Let's make this easier to understand
+]
+---
+layout: false
+.left-column[
+  ## ES6 Features and Modules
+  ## New Module Syntax
+]
+.right-column[
+Rather than some fancy word like module, what if we make this a little easier for someone to understand.
+
+Maybe some words like import and export? Those are easier to understand. Let's use those words.
+
+```javascript
+// programmer.js
+export default RubyProgrammer;
+
+// index.js
+import RubyProgrammer from './programmer';
+```
+
+Isn't that nicer?
+]
+---
+layout: false
+.left-column[
+  ## ES6 Features and Modules
+  ## New Module Syntax
+]
+.right-column[
+Now we have a bunch of modules, that we want to put on a server somewhere.
+]
+--
+.right-column[
+Clearly javascript is the best vehicle to explain to the world how awesome Ruby programmers are.
+]
+--
+.right-column[
+
+If only we had a module bundler...
+
+]
+---
+class: center, middle
+# WEBPACK
+[well, module bundlers]
+---
+layout: false
+.left-column[
+  ## Webpack
+]
+.right-column[
+Now there's multiple module bundlers available, but we use Webpack for a variety of reasons.red[*], so we're going to use that in our demo.
+
+1. Move files to ```src/client``` and create ```index.html``` in ```src/client```
+```bash
+mkdir src/client
+```
+
+3. Add ```babel-polyfill``` (to polyfill javascript on the browser) and install webpack
+```
+yarn add babel-polyfill
+yarn add --dev webpack webpack-dev-server babel-core babel-loader
+```
+
+4. Create webpack config file (copy code)
+```bash
+touch webpack.config.js
+```
+
+5. 🏁🏆??
+```bash
+webpack
+```
+
+.footnote[.red[*] Search Wiki for "Introduction to Webpack" ]
+]
+---
+layout: false
+.left-column[
+  ## Webpack
+  ## Webpack Pt. 2
+]
+.right-column[
+Now that we have webpack bundling our modules, and we have tons of modules, it's gotten really annoying to re-run webpack everytime we add something new.
+
+1. Webpack dev server (already added last page)
+    - Webpack dev server spins up a small express app that serves changes to the frontend.
+
+```bash
+webpack --progress --colors --watch
+webpack-dev-server --progress --colors
+```
+
+2. Loaders:
+    - You can add other things like css through webpack loaders
+    - I've already added a babel loader to tell webpack to send the code through babel
+]
+---
+# Final Thoughts
+- Javascript is complicated. Tools are released fast, and the ecosystem doesn't stop, but a lot of the tools now exist for a good reason
+
+- Don't get distracted and randomly additionpt tools
+  - find tools that solve your problems
+
+  - Stay tuned for part 2
+
+---
+name: last-page
+template: inverse
+
+## Fin
+    </textarea>
+    <script src="remark-latest.min.js"></script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="remark.language.js"></script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+    </script>
+  </body>
+</html>
